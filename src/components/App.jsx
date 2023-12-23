@@ -5,6 +5,7 @@ const Layout = lazy(() => import('components/Layout'));
 const HomePage = lazy(() => import('pages/HomePage'));
 const LoginPage = lazy(() => import('pages/LoginPage'));
 const RegisterPage = lazy(() => import('pages/RegisterPage'));
+const RestrictedRoute = lazy(() => import('./RestrictedRoute'));
 
 export const App = () => {
   return (
@@ -12,8 +13,21 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path="login" element={<LoginPage />} />
-          <Route path="register" element={<RegisterPage />} />
+          <Route
+            path="login"
+            element={
+              <RestrictedRoute component={LoginPage} redirectTo="/contacts" />
+            }
+          />
+          <Route
+            path="register"
+            element={
+              <RestrictedRoute
+                component={RegisterPage}
+                redirectTo="/contacts"
+              />
+            }
+          />
           <Route path="contacts" element={<div>Contacts</div>} />
           <Route path="*" element={<div>Not Found</div>} />
         </Route>
