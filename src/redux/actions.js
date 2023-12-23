@@ -52,19 +52,18 @@ export const logOut = createAsyncThunk(
 export const refreshUser = createAsyncThunk(
   'user/refresh',
   async (_, thunkAPI) => {
+    const { token } = thunkAPI.getState().user;
+    if (!token) {
+      return thunkAPI.rejectWithValue('error');
+    }
+
+    setHeaderToken(token);
+
     try {
-      const state = thunkAPI.getState();
-      const persistedToken = state.user.token;
-      if (persistedToken === null) {
-        return thunkAPI.rejectWithValue();
-      }
-      setHeaderToken(persistedToken);
-      const res = await axios.get('/users/current');
+      const res = await axios('/users/current');
       return res.data;
-    } catch {
-      return thunkAPI.rejectWithValue(
-        'Something went wrong! Reload the page and try again!'
-      );
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );

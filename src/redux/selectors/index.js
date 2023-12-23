@@ -1,1 +1,5 @@
-export { selectIsLoggedIn, selectUserName } from './selectors.js';
+export {
+  selectIsLoggedIn,
+  selectIsRefreshing,
+  selectUserName,
+} from './selectors.js';

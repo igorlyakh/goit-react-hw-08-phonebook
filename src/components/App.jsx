@@ -1,5 +1,8 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
+import { refreshUser } from '../redux/actions';
+import { selectIsRefreshing } from '../redux/selectors';
 
 const Layout = lazy(() => import('components/Layout'));
 const HomePage = lazy(() => import('pages/HomePage'));
@@ -8,30 +11,39 @@ const RegisterPage = lazy(() => import('pages/RegisterPage'));
 const RestrictedRoute = lazy(() => import('./RestrictedRoute'));
 
 export const App = () => {
+  const isRefreshing = useSelector(selectIsRefreshing);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
   return (
-    <Suspense>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route
-            path="login"
-            element={
-              <RestrictedRoute component={LoginPage} redirectTo="/contacts" />
-            }
-          />
-          <Route
-            path="register"
-            element={
-              <RestrictedRoute
-                component={RegisterPage}
-                redirectTo="/contacts"
-              />
-            }
-          />
-          <Route path="contacts" element={<div>Contacts</div>} />
-          <Route path="*" element={<div>Not Found</div>} />
-        </Route>
-      </Routes>
-    </Suspense>
+    !isRefreshing && (
+      <Suspense>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<HomePage />} />
+            <Route
+              path="login"
+              element={
+                <RestrictedRoute component={LoginPage} redirectTo="/contacts" />
+              }
+            />
+            <Route
+              path="register"
+              element={
+                <RestrictedRoute
+                  component={RegisterPage}
+                  redirectTo="/contacts"
+                />
+              }
+            />
+            <Route path="contacts" element={<div>Contacts</div>} />
+            <Route path="*" element={<div>Not Found</div>} />
+          </Route>
+        </Routes>
+      </Suspense>
+    )
   );
 };
