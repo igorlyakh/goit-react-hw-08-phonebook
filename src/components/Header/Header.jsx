@@ -1,4 +1,5 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logOut } from '../../redux/actions';
 import { selectIsLoggedIn, selectUserName } from '../../redux/selectors';
 import {
   HeaderWrapper,
@@ -10,6 +11,7 @@ import {
 } from './Header.styled';
 
 const Header = () => {
+  const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const userName = useSelector(selectUserName);
   return (
@@ -31,7 +33,9 @@ const Header = () => {
               <UserName>Welcome, {userName}!</UserName>
             </li>
             <li>
-              <LogoutButton type="button">Logout</LogoutButton>
+              <LogoutButton type="button" onClick={() => dispatch(logOut())}>
+                Logout
+              </LogoutButton>
             </li>
           </MenuList>
         ) : (
