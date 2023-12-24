@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkphonebook=self.webpackChunkphonebook||[]).push([[634],{3634:function(o,e,n){n.r(e);var t=n(4420),r=n(7689),u=n(6628),c=n(184);e.default=function(o){var e=o.component,n=o.redirectTo,s=void 0===n?"/":n,k=(0,t.v9)(u.wU),p=(0,t.v9)(u.Qb);return!k&&!p?(0,c.jsx)(r.Fg,{to:s}):(0,c.jsx)(e,{})}}}]);
-//# sourceMappingURL=634.ae71346d.chunk.js.map
