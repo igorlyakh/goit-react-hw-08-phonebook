@@ -67,3 +67,39 @@ export const refreshUser = createAsyncThunk(
     }
   }
 );
+
+export const getContacts = createAsyncThunk(
+  'contacts/getContacts',
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await axios.get('/contacts');
+      return res.data;
+    } catch {
+      return rejectWithValue('Something went wrong');
+    }
+  }
+);
+
+export const removeContact = createAsyncThunk(
+  'contacts/deleteContact',
+  async (id, { rejectWithValue }) => {
+    try {
+      const res = await axios.delete(`/contacts/${id}`);
+      return res.data;
+    } catch {
+      return rejectWithValue('Something went wrong');
+    }
+  }
+);
+
+export const createContact = createAsyncThunk(
+  'contact/createContact',
+  async (contact, { rejectWithValue }) => {
+    try {
+      const res = await axios.post('/contacts', { ...contact });
+      return res.data;
+    } catch {
+      return rejectWithValue('Something went wrong');
+    }
+  }
+);

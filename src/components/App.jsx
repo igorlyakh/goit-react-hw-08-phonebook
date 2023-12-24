@@ -11,6 +11,7 @@ const RegisterPage = lazy(() => import('pages/RegisterPage'));
 const RestrictedRoute = lazy(() => import('./RestrictedRoute'));
 const ContactsPage = lazy(() => import('pages/ContactsPage'));
 const PrivateRoute = lazy(() => import('./PrivateRoute'));
+const NotFound = lazy(() => import('pages/NotFound'));
 
 export const App = () => {
   const isRefreshing = useSelector(selectIsRefreshing);
@@ -47,7 +48,7 @@ export const App = () => {
                 <PrivateRoute redirectTo="/login" component={ContactsPage} />
               }
             />
-            <Route path="*" element={<div>Not Found</div>} />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </Suspense>
