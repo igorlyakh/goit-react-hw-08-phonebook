@@ -57,7 +57,7 @@ const AddContactForm = () => {
           </Label>
 
           <Label>
-            number
+            Phone
             <Field name="number" type="tel" placeholder="000-00-00" />
             <ErrorMessage name="number" component="span" />
           </Label>

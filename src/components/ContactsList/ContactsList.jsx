@@ -1,7 +1,7 @@
 import ListItem from 'components/ListItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeContact } from '../../redux/actions';
-import { selectContacts } from '../../redux/selectors';
+import { selectFilteredContacts } from '../../redux/selectors';
 import { List, Wrapper } from './ContactsList.styled';
 
 const ContactsList = () => {
@@ -11,7 +11,7 @@ const ContactsList = () => {
     dispatch(removeContact(id));
   };
 
-  const contacts = useSelector(selectContacts);
+  const contacts = useSelector(selectFilteredContacts);
 
   return (
     <Wrapper>

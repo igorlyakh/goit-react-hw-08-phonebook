@@ -1,5 +1,7 @@
 export {
   selectContacts,
+  selectFilter,
+  selectFilteredContacts,
   selectIsLoggedIn,
   selectIsRefreshing,
   selectUserName,
